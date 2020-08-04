@@ -1,22 +1,25 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-var fs = require('fs');
-var packageJson = require('./package.json');
+const fs = require('fs');
+const packageJson = require('./package.json');
+const getWebpackConfig = require('./webpack.config');
 
-const dependencies = packageJson.dependencies;
-const externals = ['axe-core', 'axe-puppeteer', 'puppeteer', 'yargs', 'applicationinsights'];
+const allDependencies = packageJson.dependencies;
 
-const newDependencies = {};
+const webpackConfig = getWebpackConfig();
+const externals = webpackConfig.externals ? webpackConfig.externals : [];
+
+const externalDependencies = {};
 
 externals.forEach((packageName) => {
-    newDependencies[packageName] = dependencies[packageName];
+    externalDependencies[packageName] = allDependencies[packageName];
 });
 
 const newPackageJson = {
     ...packageJson,
     scripts: {},
-    dependencies: newDependencies,
+    dependencies: externalDependencies,
     devDependencies: {},
 };
 
