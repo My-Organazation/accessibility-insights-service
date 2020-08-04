@@ -57,12 +57,6 @@ module.exports = (env) => {
                 },
                 {
                     context: './docker-image-config',
-                    from: 'package.json',
-                    to: '',
-                    ignore: ['dist/**', 'node_modules/**'],
-                },
-                {
-                    context: './docker-image-config',
                     from: '.dockerignore',
                     to: '',
                     ignore: ['dist/**', 'node_modules/**'],
@@ -72,31 +66,6 @@ module.exports = (env) => {
                     from: 'Dockerfile',
                     to: '',
                     ignore: ['dist/**', 'node_modules/**'],
-                },
-                // Copy non-bundled dependencies
-                {
-                    context: './docker-image-config',
-                    from: '../../../node_modules/axe-puppeteer',
-                    to: './node_modules/axe-puppeteer',
-                    ignore: ['dist/**'],
-                },
-                {
-                    context: './docker-image-config',
-                    from: '../../../node_modules/puppeteer',
-                    to: './node_modules/puppeteer',
-                    ignore: ['dist/**'],
-                },
-                {
-                    context: './docker-image-config',
-                    from: '../../../node_modules/applicationinsights',
-                    to: './node_modules/applicationinsights',
-                    ignore: ['dist/**'],
-                },
-                {
-                    context: './docker-image-config',
-                    from: '../../../node_modules/yargs',
-                    to: './node_modules/yargs',
-                    ignore: ['dist/**'],
                 },
             ]),
         ],
